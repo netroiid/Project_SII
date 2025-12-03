@@ -10,7 +10,7 @@
 {{-- HEADER & EXPORT --}}
 <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
     <h5 class="text-secondary">Ringkasan Kinerja</h5>
-    <a href="#" class="btn btn-primary">
+    <a href="{{ route('laporan.export') }}" class="btn btn-primary">
         <i class="ri-file-download-line me-1"></i> Export Laporan
     </a>
 </div>
@@ -87,7 +87,8 @@
                         <th>Kategori</th>
                         <th>Stok Saat Ini</th>
                         <th>Nilai Stok</th>
-                        <th>Status</th>
+                        <th>Status Kesegaran</th>
+                        <th>Status Stok</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,12 +103,21 @@
                         </td>
                         <td>Rp {{ number_format($row->nilai_stok,0,',','.') }}</td>
                         <td>
-                            @if($row->status === 'Kadaluarsa')
-                            <span class="badge bg-danger">Kadaluarsa</span>
-                            @elseif($row->status === 'Segera Habis')
-                            <span class="badge bg-warning text-dark">Segera Habis</span>
+                            @if($row->status_kesegaran === 'Kadaluarsa')
+                                <span class="badge bg-danger">Kadaluarsa</span>
+                            @elseif($row->status_kesegaran === 'Segera Habis')
+                                <span class="badge bg-warning text-dark">Segera Habis</span>
                             @else
-                            <span class="badge bg-success">Aman</span>
+                                <span class="badge bg-success">Segar</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($row->status_stok === 'Habis')
+                                <span class="badge bg-danger">Habis</span>
+                            @elseif($row->status_stok === 'Menipis')
+                                <span class="badge bg-warning text-dark">Menipis</span>
+                            @else
+                                <span class="badge bg-success">Aman</span>
                             @endif
                         </td>
                     </tr>

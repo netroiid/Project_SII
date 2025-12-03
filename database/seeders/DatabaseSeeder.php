@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Flower;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -72,5 +73,15 @@ class DatabaseSeeder extends Seeder
             'price_per_unit' => 10000,
             'expired_at' => now()->addDays(5)
         ]);
+
+        // Create an admin user (development convenience)
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => 'password',
+                'is_admin' => true,
+            ]
+        );
     }
 }

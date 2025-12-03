@@ -2,9 +2,25 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="mb-4">
-    <h4>Dashboard Utama</h4>
-    <p class="text-muted">Ringkasan cepat kinerja usaha bunga segar Anda.</p>
+<div class="mb-4 d-flex justify-content-between align-items-start">
+    <div>
+        <h4>Dashboard Utama</h4>
+    </div>
+
+    <div class="text-end">
+        {{-- Teks Hi Admin --}}
+        @if(auth('admin')->check())
+        <p class="mb-1 fw-bold">
+            👋 Hi, {{ auth('admin')->user()->name }}
+        </p>
+        @endif
+
+        {{-- Tombol Logout --}}
+        <form method="POST" action="{{ route('admin.logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+        </form>
+    </div>
 </div>
 
 {{-- 1. SUMMARY CARDS (Menggunakan style Laporan) --}}
